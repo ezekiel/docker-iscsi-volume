@@ -1,14 +1,15 @@
 package main
 
 import (
+	"docker-iscsi-volume/iscsi"
+
 	"fmt"
 	"log"
 	"os"
 	"path/filepath"
 
-	"github.com/calavera/dkvolume"
-	"github.com/codegangsta/cli"
-	"github.com/phoenix-io/docker-iscsi-volume/iscsi"
+	"github.com/docker/go-plugins-helpers/volume"
+	"github.com/urfave/cli"
 )
 
 const (
@@ -18,7 +19,7 @@ const (
 )
 
 var (
-	defaultPath = filepath.Join(dkvolume.DefaultDockerRootDirectory, iscsiVolumeID)
+	defaultPath = filepath.Join(volume.DefaultDockerRootDirectory, iscsiVolumeID)
 )
 
 func main() {
@@ -57,10 +58,10 @@ func main() {
 	}
 	plugin.Run(os.Args)
 
-	d := newISCSIVolumeDriver("iscsi")
-	h := dkvolume.NewHandler(d)
+	d := ISCSIVolumeDriver("iscsi")
+	h := volume.NewHandler(d)
 	fmt.Println("Listening on ", socketAddress)
-	fmt.Println(h.ServeUnix("root", socketAddress))
+	fmt.Println(h.ServeUnix("root", 987 /*socketAddress*/))
 
 }
 
