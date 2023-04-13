@@ -19,10 +19,10 @@ jobs:
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
-        go-version: 1.10.4
+        go-version: 1.20.3
 
     - name: Download
-      run: go get
+      run: go install
 
     - name: Build
       run: go build -v ./...
