@@ -145,7 +145,7 @@ func (plugin *ISCSIPlugin) LoginTarget(target string, group string) error {
 }
 
 // iscsiadm -m node -u
-// iscsiadm -m node -u -T <Complete Target Name>-p <Group IP address>:3260
+// iscsiadm -m node -u -T <Complete Target Name> -p <Group IP address>:3260
 
 func (plugin *ISCSIPlugin) LogoutTarget(target string, group string) error {
 	var out, errMsg string
